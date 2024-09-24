@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState, useEffect, useContext } from "react
 import { destroyCookie, setCookie, parseCookies } from "nookies";
 import { api } from "../services/apiClient";
 import { useRouter } from "next/navigation";
+import Router from "next/router";
 
 interface AuthContextData {
     user: UserProps;
@@ -46,12 +47,12 @@ export const AuthContext = createContext({} as AuthContextData);
 //Função para deslogar o usuario
 export function SignOut() {
 
-    const router = useRouter();
+    // const router = useRouter();
 
     console.log("error logout")
     try{
         destroyCookie(null, "@barber.token", {path: "/"});
-        router.push("/login");
+        Router.push("/login");
     }catch(err){
         console.log("error logout")
 
@@ -62,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const [user, setUser] = useState<UserProps>();
     
-    const router = useRouter();
+    // const router = useRouter();
 
     const isAuthenticated = !!user;
 
@@ -117,8 +118,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             alert("Login efetuado com sucesso");
 
-            // Router.push("/dashboard");
-            router.push("/dashboard");
+            Router.push("/dashboard");
+            // router.push("/dashboard");
 
         }catch(err) {
 
@@ -135,7 +136,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password
             })
 
-            router.push("/login");
+            Router.push("/login");
+            // router.push("/login");
             alert("Cadastro efetuado com sucesso");
 
         } catch(err) {
@@ -148,7 +150,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function logoutUser() {
         try{
             destroyCookie(null, "@barber.token", {path: "/"});
-            router.push("/");
+            Router.push("/");
+            // router.push("/");
             setUser(null);
         } catch(err) {
             console.log("erro ao sair", err)

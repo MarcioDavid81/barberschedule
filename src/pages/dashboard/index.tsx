@@ -14,40 +14,40 @@ export default function Dashboard() {
 
   const { user } = useAuth();
 
-  const [dataUser, setDataUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [dataUser, setDataUser] = useState({});
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-      async function loadUserData() {
-          const response = await api.get('/me')
+  //     async function loadUserData() {
+  //         const response = await api.get('/me')
 
-          setDataUser(response.data);
-          setLoading(false);
-      }
+  //         setDataUser(response.data);
+  //         setLoading(false);
+  //     }
 
-      loadUserData();
+  //     loadUserData();
 
-  }, []);
+  // }, []);
 
-  if(loading) {
-      return (
-          <>
-              <Flex bg={"#1c1d29"} h={"100vh"} justifyContent="center" alignItems="center">
-                  <Watch
-                      visible={true}
-                      height="80"
-                      width="80"
-                      radius="48"
-                      color="orange"
-                      ariaLabel="watch-loading"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                  />
-              </Flex>
-          </>
-      )
-  }
+  // if(loading) {
+  //     return (
+  //         <>
+  //             <Flex bg={"#1c1d29"} h={"100vh"} justifyContent="center" alignItems="center">
+  //                 <Watch
+  //                     visible={true}
+  //                     height="80"
+  //                     width="80"
+  //                     radius="48"
+  //                     color="orange"
+  //                     ariaLabel="watch-loading"
+  //                     wrapperStyle={{}}
+  //                     wrapperClass=""
+  //                 />
+  //             </Flex>
+  //         </>
+  //     )
+  // }
 
   return (
     <>
