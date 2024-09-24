@@ -5,8 +5,11 @@ import logoImg from '../../../public/images/logo.png'
 import styles from './header.module.scss';
 import Link from 'next/link';
 import { FaUserLock } from 'react-icons/fa';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Header() {
+
+    const { user } = useAuth();
 
     const [scrolled, setScrolled] = useState(false);
 
@@ -47,7 +50,7 @@ export default function Header() {
                        <Link href="/login" >
                         <button className={styles.button}>
                             <FaUserLock />
-                            LOGIN
+                            {user ? "DASHBOARD" : "LOGIN"}
                         </button>
                        </Link>
             

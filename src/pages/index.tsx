@@ -15,7 +15,7 @@ export default function Home() {
   return(
     <>
       <Head>
-        <title>Barber Schedule</title>
+        <title>Barber Schedule - Sua Agenda On Line</title>
       </Head>
       <Header />
       <Hero />
@@ -23,7 +23,7 @@ export default function Home() {
       
       <section id="sobre" className={styles.sobreContainer}>
           <div className={styles.interface}>
-            <div className={styles.sobreTitle}>
+            <div className={styles.sobreTitle} >
               <h1>Bem-vindo ao Barber Schedule</h1>
               <p>O sistema de agendamentos online que vai transformar a forma como sua barbearia gerencia o tempo e os atendimentos.</p>
             </div>

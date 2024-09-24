@@ -1,10 +1,7 @@
 import type { AppProps } from "next/app";
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import WAButton from "@/components/WAButton";
+import { AuthProvider } from "@/context/AuthContext";
 
 const colors = {
   barber: {
@@ -23,14 +20,18 @@ const colors = {
   }
 }
 
-const theme = extendTheme({ colors })
+const fonts = {
+  body: 'Nunito, sans-serif',
+}
+
+const theme = extendTheme({ colors, fonts })
 
 export default function App({ Component, pageProps }: AppProps) {
   return ( 
     <ChakraProvider theme={theme}>
-
-      <Component {...pageProps} />
-
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ChakraProvider>
   )
 }

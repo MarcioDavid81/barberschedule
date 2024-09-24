@@ -1,63 +1,74 @@
-
 import { useState, useContext } from "react";
 import Image from "next/image";
 import logoImg from "../../../public/images/logo.png";
 import { Flex, Text, Button, Input, Center } from "@chakra-ui/react";
 import Link from "next/link";
-import styles from "./login.module.scss";
+import styles from "./register.module.scss";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { AuthContext } from "../../context/AuthContext";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import { canSSRGuest } from "@/utils/canSSRGuest";
 
-export default function Login() {
+export default function Register() {
 
-    const { signIn } = useContext(AuthContext);
+    const { signUp } = useContext(AuthContext);
 
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    async function handleLogin() {
+    
 
-        if(email === "" || password === "") {
+    async function handleRegister() {
+        if(name === "" || email === "" || password === "") {
             alert("Preencha todos os campos!");
             return;
         }
 
-        await signIn({
-            email,
-            password,
-        })
+        await signUp({name, email, password});
     }
+
 
     return(
         <>
             <Head>
-                <title>Barber Schedule - Login</title>
+                <title>Barber Schedule - Cadastro</title>
             </Head>
         
             <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center">
                 <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"}>
-                <motion.div
+            <motion.div
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 1 }}
                 >
                     <Center p={4}>
-                        <Image src={logoImg} alt="Logo" width={180} quality={100} objectFit="fill" />
+                        <Image src={logoImg} alt="Logo" width={180} height={180} quality={100} objectFit="fill" />
                     </Center>
 
                     <Center>
-                        <Text fontSize={24} fontWeight={500} mb={6} color={"orange"}>Faça Login</Text>
+                        <Text fontSize={24} fontWeight={500} mb={6} color={"orange"}>Cadastre-se</Text>
                     </Center>
 
+                    <Input
+                        background={"default"}
+                        placeholder="Barbearia"
+                        type="text"
+                        variant={"filled"}
+                        size={"lg"}
+                        mb={3}
+                        color={"#1c1d29"}
+                        _focus={{borderColor: "orange", color: "#fff"}}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <Input
                         background={"default"}
                         placeholder="E-mail"
                         type="email"
                         variant={"filled"}
-                        size="lg"
+                        size={"lg"}
                         mb={3}
                         color={"#1c1d29"}
                         _focus={{borderColor: "orange", color: "#fff"}}
@@ -68,7 +79,7 @@ export default function Login() {
                     <Input
                         background={"default"}
                         placeholder="******"
-                        type="password"
+                        type="text"
                         variant={"filled"}
                         size={"lg"}
                         mb={6}
@@ -84,17 +95,17 @@ export default function Login() {
                         size={"lg"}
                         fontWeight={400}
                         bg={"orange"}
-                        transition={"0.3s"}
+                        transition={"0.3s"}                        
                         _hover={{bg: "#1c1d29"}}
-                        className={styles.buttonLogin}
-                        onClick={handleLogin}
+                        className={styles.buttonRegister}
+                        onClick={handleRegister}
                     >
-                        Entrar
+                        Cadastrar
                     </Button>
 
                     <Center>
-                        <Link href="/register">
-                            <Text color="button.default" fontSize={14} fontWeight={500}>Não tem uma conta? <strong>Cadastre-se</strong></Text>
+                        <Link href="/login">
+                            <Text color="button.default" fontSize={14} fontWeight={500}>Já tem uma conta? <strong>Faça Login</strong></Text>
                         </Link>
                     </Center>
 
@@ -124,8 +135,6 @@ export default function Login() {
 
 export const getServerSideProps = canSSRGuest(async (ctx) => {
     return {
-        props: {
-            
-        }
+        props: {}
     }
-})
+});

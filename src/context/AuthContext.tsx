@@ -4,7 +4,7 @@ import { api } from "../services/apiClient";
 import { useRouter } from "next/navigation";
 
 interface AuthContextData {
-    user: UserProps | null;
+    user: UserProps;
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>;
     signUp: (credentials: SignUpProps) => Promise<void>;
@@ -16,6 +16,8 @@ interface UserProps {
     name: string;
     email: string;
     adress: string | null;
+    phone: string | null;
+    banner: string | null;
     subscriptions?: SubscriptionProps | null;
 }
 
@@ -41,6 +43,7 @@ interface SignUpProps {
 
 export const AuthContext = createContext({} as AuthContextData);
 
+//Função para deslogar o usuario
 export function SignOut() {
 
     const router = useRouter();
@@ -57,7 +60,7 @@ export function SignOut() {
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [user, setUser] = useState<UserProps | null>(null);
+    const [user, setUser] = useState<UserProps>();
     
     const router = useRouter();
 
@@ -68,13 +71,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         if(token) { // se o token for valido, ele vai pegar os dados do usuario e efetuar o login
             api.get("/me").then(response => {
-                const { id, name, email, adress, subscriptions } = response.data;
+                const { id, name, email, adress, phone, banner, subscriptions } = response.data;
 
                 setUser({
                     id,
                     name,
                     email,
                     adress,
+                    phone,
+                    banner,
                     subscriptions
                 });
             }).catch(() => { // se der erro no token, ele vai deslogar
@@ -83,6 +88,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }, []);
 
+    //Função para logar o usuario
     async function signIn({ email, password }: SignInProps) {
         try {
             const response = await api.post("/session", {
@@ -90,7 +96,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password,
             });
 
-            const { id, name, token, subscriptions, adress } = response.data;
+            const { id, name, token, subscriptions, adress, phone, banner } = response.data;
 
             setCookie(undefined, "@barber.token", token, {
                 maxAge: 60 * 60 * 24 * 30, // 30 days
@@ -102,12 +108,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 name,
                 email,
                 adress,
+                phone,
+                banner,
                 subscriptions
             });
 
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`
-
-            console.log("login efetuado com sucesso")
 
             alert("Login efetuado com sucesso");
 
@@ -115,7 +121,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
             router.push("/dashboard");
 
         }catch(err) {
-            console.log("erro ao entrar", err)
 
             alert("Erro ao entrar, tente novamente");
         }

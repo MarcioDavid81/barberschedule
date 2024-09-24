@@ -2,7 +2,7 @@ import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult
 import { destroyCookie, parseCookies } from "nookies";
 import { AuthTokenErrors } from "../services/errors/AuthTokenError";
 
-export function canSSRAuth<P extends { [key: string]: any }>(fn: GetServerSideProps<P>){
+export function canSSRAuth<P>(fn: GetServerSideProps<P>){
   return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
     
@@ -31,11 +31,5 @@ export function canSSRAuth<P extends { [key: string]: any }>(fn: GetServerSidePr
         }
       }
     }
-
-    // Ensure a return statement is always reached
-    return {
-      notFound: true,
-    };
   }
-
 }

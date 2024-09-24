@@ -16,8 +16,9 @@ import {
 import { FiMenu, FiScissors, FiSettings, FiClipboard, FiLogOut } from "react-icons/fi";
 import { IconType } from "react-icons";
 import Link from "next/link";
-// import { AuthContext } from "@/app/context/AuthContext";
-// import { useAuth } from "@/app/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
+import { color } from "framer-motion";
 
 interface LinkItemProps {
     name: string;
@@ -38,11 +39,10 @@ export function Sidebar({children}: {children: ReactNode}) {
     const {isOpen, onOpen, onClose} = useDisclosure();
 
     return(
-        <Box minH={100} bg="black">
+        <Box minH={100} bg="#1c1d29">
             <SidebarContent 
                 onClose={() => onClose}
-                display={{base: "none", md: "block"}}
-                color="orange"
+                display={{base: "none", md: "block"}}    
             />
 
             <Drawer
@@ -66,7 +66,7 @@ export function Sidebar({children}: {children: ReactNode}) {
 
             <MobileNav onOpen={onOpen} />
 
-            <Box ml={{base: 0, md: 60}}>
+            <Box ml={{base: 0, md: 60}} p={4}>
                 {children}
             </Box>
 
@@ -74,25 +74,24 @@ export function Sidebar({children}: {children: ReactNode}) {
     )
 }
 
-interface SidebarProps {
+interface SidebarProps extends BoxProps {
     onClose: () => void;
     display: BoxProps["display"];
-    color: string;
 }
 
 const SidebarContent = ({onClose, display, ...rest}: SidebarProps) => {
 
-    // const { logoutUser } = useContext(AuthContext);
+    const { logoutUser } = useContext(AuthContext);
 
-    // const { user } = useAuth();
+    const { user } = useAuth();
 
     async function handleLogout() {
-        // await logoutUser();
+        await logoutUser();
     }
 
     return(
         <Box
-            bg="black"
+            bg="barber.900"
             borderRight="1px"
             borderRightColor="gray.700"
             w={{base: "full", md: 60}}
@@ -109,10 +108,11 @@ const SidebarContent = ({onClose, display, ...rest}: SidebarProps) => {
             >
                 <Link href="/dashboard">
                     <Text fontSize="2xl" color="orange" ml="2">Olá,</Text>
-                    {/* {user? <Text fontSize="lg" color="white" ml="2"> {user.name}</Text> : null} */}
+                    {user? <Text fontSize="lg" color="white" ml="2"> {user.name}</Text> : null}
                   
                 </Link>
                 <CloseButton
+                    color="orange"
                     display={{base: 'flex', md: 'none'}}
                     onClick={onClose}
                 />
@@ -182,6 +182,7 @@ const NavItem = ({icon, children, route, ...rest}: NavItemProps) => {
                     color="orange"
                     _groupHover={{
                         color: "white"
+
                     }}
                 />
             )}
@@ -197,7 +198,7 @@ interface MobileProps extends FlexProps {
 
 const MobileNav = ({onOpen}: MobileProps) => {
 
-    // const { user } = useAuth();
+    const { user } = useAuth();
 
     return(
         <Flex
@@ -205,9 +206,9 @@ const MobileNav = ({onOpen}: MobileProps) => {
             px={{base: 4, md: 24}}
             height="20"
             alignItems="center"
-            bg={"black"}
+            bg={"barber.900"}
             borderBottomWidth="1px"
-            borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+            borderBottomColor={useColorModeValue("gray.200", "gray.900")}
             justifyContent="flex-start"
             display={{base: "flex", md: "none"}}
         >
@@ -217,11 +218,12 @@ const MobileNav = ({onOpen}: MobileProps) => {
                 icon={<FiMenu color="orange" fontSize={30} />}
                 variant="outline"
                 aria-label="open menu"
+                borderColor={"transparent"}
             />
 
             <Flex flex={{base: 1, md: "auto"}} ml={8} display="flex" alignItems="center">
                 <Text fontSize="2xl" color="orange">Olá,</Text>
-                {/* {user? <Text fontSize="2xl" color="white" ml="2"> {user.name}</Text> : null} */}
+                {user? <Text fontSize="2xl" color="white" ml="2"> {user.name}</Text> : null}
             </Flex>
 
         </Flex>
