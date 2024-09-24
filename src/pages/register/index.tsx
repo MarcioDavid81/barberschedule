@@ -37,7 +37,7 @@ export default function Register() {
             </Head>
         
             <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center">
-                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"}>
+                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"} p={4}>
             <motion.div
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}

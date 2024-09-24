@@ -18,21 +18,42 @@ interface UserProps {
 }
 
 interface ProfileProps {
-  users: UserProps;
+  user: UserProps;
   premium: boolean;
 }
 
-export default function Profile({ users, premium }: ProfileProps) {
+export default function Profile({ user, premium }: ProfileProps) {
 
-  const { logoutUser, user } = useAuth();
+  const { logoutUser } = useAuth();
 
-  const [name, setName] = useState(user.name);
-  const [adress, setAdress] = useState(user.adress);
-  const [phone, setPhone] = useState(user.phone);
+  const [name, setName] = useState(user && user.name);
+  const [adress, setAdress] = useState(user?.adress ? user?.adress : "");
+  const [phone, setPhone] = useState(user?.phone ? user?.phone : "");
 
   async function handleLogout() {
     await logoutUser();
   }
+
+  async function handleUpdateUser() {
+    if(name === "") {
+      alert("Preencha o campo de nome!");
+      return;
+    }
+
+    try{
+
+      const apiClient = setupAPIClient();
+      await apiClient.put('/users', {
+        name,
+        adress,
+        phone
+      });
+
+    }catch(err) {
+      console.log(err);
+
+  }
+}
 
   return (
     <>

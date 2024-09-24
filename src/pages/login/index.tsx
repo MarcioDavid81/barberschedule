@@ -37,7 +37,7 @@ export default function Login() {
                 <title>Barber Schedule - Login</title>
             </Head>
         
-            <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center">
+            <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center" p={4}>
                 <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"}>
                 <motion.div
                     initial={{ scale: 0.5 }}
