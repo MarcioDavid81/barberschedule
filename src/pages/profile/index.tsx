@@ -2,7 +2,6 @@
 import { Sidebar } from '@/components/Sidebar'
 import Head from 'next/head'
 import React, { useState } from 'react'
-import { useAuth } from '@/context/AuthContext';
 import { Box, Button, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { canSSRAuth } from '@/utils/canSSRAuth';
@@ -13,7 +12,7 @@ interface UserProps {
   name: string;
   email: string;
   adress: string | null;
-  phone: string | null;
+  phone: number | null;
   banner: string | null;
 }
 
@@ -24,15 +23,9 @@ interface ProfileProps {
 
 export default function Profile({ user, premium }: ProfileProps) {
 
-  const { logoutUser } = useAuth();
-
   const [name, setName] = useState(user && user.name);
   const [adress, setAdress] = useState(user?.adress ? user?.adress : "");
   const [phone, setPhone] = useState(user?.phone ? user?.phone : "");
-
-  async function handleLogout() {
-    await logoutUser();
-  }
 
   async function handleUpdateUser() {
     if(name === "") {
@@ -44,10 +37,12 @@ export default function Profile({ user, premium }: ProfileProps) {
 
       const apiClient = setupAPIClient();
       await apiClient.put('/users', {
-        name,
-        adress,
-        phone
+        name: name,
+        adress: adress,
+        phone: phone,
       });
+
+      alert("Usuário atualizado com sucesso!");
 
     }catch(err) {
       console.log(err);
@@ -61,7 +56,7 @@ export default function Profile({ user, premium }: ProfileProps) {
         <title>Minha Conta: {user ? user.name : ""}</title>
       </Head>
       <Sidebar>
-          <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" minH="100vh" color="white">
+          <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" h="100vh" color="white">
             <Flex w="100%" direction="row" alignItems="center" justifyContent="flex-start">
               <Heading fontSize="3xl" mt={4} mb={4} mr={4} color="orange">Minha Conta</Heading>
             </Flex>
@@ -89,7 +84,7 @@ export default function Profile({ user, premium }: ProfileProps) {
                   value={adress}
                   onChange={(e) => setAdress(e.target.value)}
                 />
-                <Text mb={2} fontSize="xl" fontWeight="bold">Telefone:</Text>
+                {/* <Text mb={2} fontSize="xl" fontWeight="bold">Telefone:</Text>
                 <Input 
                   w="100%"
                   bg="gray.900"
@@ -99,7 +94,7 @@ export default function Profile({ user, premium }: ProfileProps) {
                   mb={4}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                />
+                /> */}
                 <Text mb={2} fontSize="xl" fontWeight="bold">Plano Atual:</Text>
                 <Flex 
                   direction="row" 
@@ -128,23 +123,23 @@ export default function Profile({ user, premium }: ProfileProps) {
                   size="lg"
                   mb={4}
                   _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
+                  onClick={handleUpdateUser}
                 >
                   Salvar
                 </Button>
-
-                <Button
-                  w="100%"
-                  bg="transparent"
-                  borderWidth={1}
-                  borderColor="button.danger"
-                  color="button.danger"
-                  size="lg"
-                  _hover={{ bg: "button.danger", color: "barber.900"}}
-                  onClick={handleLogout}
-                >
-                  Sair da Conta
-                </Button>
-
+                <Link href="/">
+                  <Button
+                    w="100%"
+                    bg="transparent"
+                    borderWidth={1}
+                    borderColor="button.danger"
+                    color="button.danger"
+                    size="lg"
+                    _hover={{ bg: "button.danger", color: "barber.900"}}
+                  >
+                    Retornar à Home
+                  </Button>
+                </Link>
               </Flex>
             </Flex>
           </Flex>
