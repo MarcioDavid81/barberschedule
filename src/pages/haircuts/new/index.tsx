@@ -62,7 +62,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
                       </Button>
                     </Link>
                     <Heading fontSize={isMobile ? "26px" : "3xl"} mt={4} mb={4} mr={4} color="orange">
-                      Novo Corte
+                      Modelos de Corte
                     </Heading>
                 </Flex>
 
@@ -86,7 +86,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
                   <Input 
                     placeholder="Valor do Corte"
                     size="lg"
-                    type='text'
+                    type='number'
                     w="85%"
                     bg="barber.400"
                     color="white"

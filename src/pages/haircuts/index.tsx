@@ -1,6 +1,6 @@
 import { Sidebar } from '@/components/Sidebar'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import { useAuth } from '@/context/AuthContext';
 import { Button, Flex, Heading, Stack, Switch, Text, useMediaQuery, Link } from '@chakra-ui/react';
 import { IoMdPricetag } from 'react-icons/io';
@@ -29,6 +29,39 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
     const { user } = useAuth();
 
     const [haircutList, setHaircutList] = useState<HaircutsItem[]>(haircuts || []);
+
+    const [disableHaircut, setDisableHaircut] = useState("enabled");
+
+    async function handleDisable(e: ChangeEvent<HTMLInputElement>) {
+
+      const apiClient = setupAPIClient();
+
+      if(e.target.value === 'disabled') {
+
+        setDisableHaircut('enabled');
+
+        const response = await apiClient.get('/haircuts', {
+          params: {
+            status: true
+          }
+        })
+
+        setHaircutList(response.data);
+
+      } else {
+
+        setDisableHaircut('disabled');
+
+        const response = await apiClient.get('/haircuts', {
+          params: {
+            status: false
+          }
+        })
+
+        setHaircutList(response.data);
+
+      }
+    }
 
   return (
     <>
@@ -60,6 +93,9 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
                     <Switch 
                       colorScheme="green"
                       size="lg"
+                      value={disableHaircut}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => handleDisable(e)}
+                      isChecked={disableHaircut === 'disabled' ? false : true}
                     />
                   </Stack>
                 </Flex>
