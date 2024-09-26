@@ -55,7 +55,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
             <Flex bg="#1c1d29" minH="100vh" color="#fff" direction="column" alignItems="flex-start" justifyContent="flex-start">
 
                 <Flex direction={isMobile ? "column" : "row"} w="100%" align={isMobile ? 'flex-start' : 'center'} mb={isMobile ? 2 : 4}>
-                    <Link href='/haircuts'>
+                    <Link href='/haircuts' style={{textDecoration: "none"}}>
                       <Button mr={4} display="flex" alignItems="center" justifyContent="center">
                         <FiChevronLeft size={28} color='orange'/>
                         Voltar

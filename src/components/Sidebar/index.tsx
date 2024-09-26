@@ -13,12 +13,11 @@ import {
     FlexProps,
     Icon
 } from "@chakra-ui/react";
-import { FiMenu, FiScissors, FiSettings, FiClipboard, FiLogOut } from "react-icons/fi";
+import { FiMenu, FiScissors, FiSettings, FiClipboard, FiLogOut, FiHome } from "react-icons/fi";
 import { IconType } from "react-icons";
 import Link from "next/link";
 import { AuthContext } from "@/context/AuthContext";
 import { useAuth } from "@/context/AuthContext";
-import { color } from "framer-motion";
 
 interface LinkItemProps {
     name: string;
@@ -32,6 +31,7 @@ const linkItens: Array<LinkItemProps> = [
     {name: 'Agenda', icon: FiClipboard, href: '/dashboard'},
     {name: 'Cortes', icon: FiScissors, href: '/haircuts'},
     {name: 'Minha Conta', icon: FiSettings, href: '/profile'},
+    {name: 'Home', icon: FiHome, href: '/'},
 ]
 
 export function Sidebar({children}: {children: ReactNode}) {

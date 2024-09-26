@@ -101,7 +101,7 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
                 </Flex>
 
                 {haircutList.map(haircut => (
-                  <Link key={haircut.id} href={`/haircuts/${haircut.id}`} w={"100%"} pt={2}>
+                  <Link key={haircut.id} href={`/haircuts/${haircut.id}`} w={"100%"} pt={2} style={{textDecoration: "none"}} _hover={{color: "orange"}}>
                     <Flex 
                       cursor="pointer"
                       w="100%" 

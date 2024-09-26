@@ -94,7 +94,7 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
                     mb={isMobile ? 2 : 4}
                 >
 
-                    <Link href='/haircuts'>
+                    <Link href='/haircuts' style={{textDecoration: "none"}}>
                       <Button mr={4} display="flex" alignItems="center" justifyContent="center">
                         <FiChevronLeft size={28} color='orange'/>
                         Voltar
