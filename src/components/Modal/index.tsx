@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Text, Flex, Button } from '@chakra-ui/react'
-import { FiUsers, FiScissors, FiUser } from 'react-icons/fi'
+import { FiUsers, FiScissors } from 'react-icons/fi'
 import { FaMoneyBillAlt } from 'react-icons/fa'
 import { ScheduleItem } from '@/pages/dashboard'
 
@@ -39,8 +39,7 @@ export function ModalInfo({ isOpen, onOpen, onClose, data, finishService }: Moda
                 </Flex>
 
                 <ModalFooter>
-                    <Button colorScheme="green" mr={3} onClick={() => finishService() }>Finalizar</Button>
-                    <Button colorScheme="red" onClick={onClose}>Cancelar</Button>
+                    <Button colorScheme="green" position={"absolute"} bottom={4} right={4} onClick={() => finishService() }>Finalizar</Button>
                 </ModalFooter>
 
             </ModalBody>

@@ -4,7 +4,7 @@ import React, { useState, ChangeEvent } from 'react'
 import { useAuth } from '@/context/AuthContext';
 import { Button, Flex, Heading, Stack, Switch, Text, useMediaQuery, Link } from '@chakra-ui/react';
 import { IoMdPricetag } from 'react-icons/io';
-import { FiScissors } from 'react-icons/fi';
+import { FiScissors, FiTrash2 } from 'react-icons/fi';
 import { canSSRAuth } from '@/utils/canSSRAuth';
 import { setupAPIClient } from '@/services/api';
 
@@ -69,7 +69,7 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
            <title>Cortes: {user ? user.name : ""}</title>
         </Head>
         <Sidebar>
-            <Flex bg="#1c1d29" h="100vh" color="#fff" direction="column" alignItems="flex-start" justifyContent="flex-start">
+            <Flex bg="#1c1d29" minH="100vh" color="#fff" direction="column" alignItems="flex-start" justifyContent="flex-start">
                 <Flex
                   direction={isMobile ? "column" : "row"}
                   w="100%"

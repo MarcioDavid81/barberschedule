@@ -86,6 +86,7 @@ export default function New({haircuts}: NewProps) {
 
                 <Input
                     placeholder="Nome do Cliente"
+                    color="button.cta"
                     bg="barber.400"
                     mb={3}
                     size="lg"
@@ -95,9 +96,9 @@ export default function New({haircuts}: NewProps) {
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setCustomer(e.target.value)}
                 />
 
-                <Select mb={3} size="lg" w="85%" color="orange" bg="barber.400" onChange={(e) => handleChangeSelect(e.target.value)}>
+                <Select mb={3} size="lg" w="85%" color="button.cta" bg="barber.400" onChange={(e) => handleChangeSelect(e.target.value)}>
                     {haircuts?.map(item => (
-                        <option key={item?.id} value={item?.id}>{item?.name}</option>
+                        <option style={{backgroundColor: "#1c1d29", color: "orange"}} key={item?.id} value={item?.id}>{item?.name}</option>
                     ))}
                 </Select>
 

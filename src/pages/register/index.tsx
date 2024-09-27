@@ -3,7 +3,6 @@ import Image from "next/image";
 import logoImg from "../../../public/images/logo.png";
 import { Flex, Text, Button, Input, Center } from "@chakra-ui/react";
 import Link from "next/link";
-import styles from "./register.module.scss";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { AuthContext } from "../../context/AuthContext";
 import { motion } from "framer-motion";
@@ -36,9 +35,9 @@ export default function Register() {
                 <title>Barber Schedule - Cadastro</title>
             </Head>
         
-            <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center">
-                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"} p={4}>
-            <motion.div
+            <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center" p={4}>
+                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"barber.900"}>
+                <motion.div
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 1 }}
@@ -94,13 +93,11 @@ export default function Register() {
                         w={"100%"}
                         size={"lg"}
                         fontWeight={400}
-                        bg={"orange"}
-                        transition={"0.3s"}                        
-                        _hover={{bg: "#1c1d29"}}
-                        className={styles.buttonRegister}
+                        bg="button.cta"                    
+                        _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
                         onClick={handleRegister}
                     >
-                        Cadastrar
+                        <Text size="lg" fontWeight="bold">CADASTRAR</Text>
                     </Button>
 
                     <Center>
@@ -115,12 +112,11 @@ export default function Register() {
                             mt={6}
                             size={"lg"}
                             fontWeight={400}
-                            bg={"orange"}
-                            transition={"0.3s"}
-                            _hover={{bg: "#1c1d29"}}
-                            className={styles.comebackButon}
+                            bg="button.cta"
+                            _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
                         >
-                            <IoArrowBackCircleOutline /> Voltar
+                            <IoArrowBackCircleOutline size={24} style={{marginRight: "10px"}} />
+                            <Text size="lg" fontWeight="bold">Voltar</Text>
                         </Button>
                     </Link>
                     </Center>

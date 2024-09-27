@@ -84,7 +84,7 @@ export default function Profile({ user, premium }: ProfileProps) {
                   value={adress}
                   onChange={(e) => setAdress(e.target.value)}
                 />
-                {/* <Text mb={2} fontSize="xl" fontWeight="bold">Telefone:</Text>
+                <Text mb={2} fontSize="xl" fontWeight="bold">Telefone:</Text>
                 <Input 
                   w="100%"
                   bg="gray.900"
@@ -94,7 +94,7 @@ export default function Profile({ user, premium }: ProfileProps) {
                   mb={4}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                /> */}
+                />
                 <Text mb={2} fontSize="xl" fontWeight="bold">Plano Atual:</Text>
                 <Flex 
                   direction="row" 
@@ -109,7 +109,7 @@ export default function Profile({ user, premium }: ProfileProps) {
                   <Text fontSize="xl" fontWeight="bold" color={premium ? "orange" : "#4dffb4"} p={2}>
                     {premium ? "Plano Premium" : "Plano Básico"}
                   </Text>
-                  <Link href="/profile/upgrade">
+                  <Link href="/planos">
                     <Box cursor="pointer" p={1} pl={2} pr={2} bg="#00cd52" rounded={4} >
                       Mudar Plano
                     </Box>

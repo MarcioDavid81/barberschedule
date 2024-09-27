@@ -2,10 +2,11 @@ import Head from "next/head";
 import { Flex, Text, Heading, Button, useMediaQuery, Link, Input, Stack, Switch } from "@chakra-ui/react";
 import { useAuth } from "@/context/AuthContext";
 import { Sidebar } from "@/components/Sidebar";
-import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronLeft, FiTrash2 } from "react-icons/fi";
 import { canSSRAuth } from "@/utils/canSSRAuth";
 import { setupAPIClient } from "@/services/api";
 import { ChangeEvent, useState } from "react";
+import Router from "next/router";
 
 interface HaircutProps {
     id: string;
@@ -39,6 +40,7 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
 
     //Função para atualizar o corte
     async function handleSave() {
+
         if(name === "" || price === "") {
             alert("Preencha todos os campos!");
             return;
@@ -70,6 +72,27 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
         } else {
             setDisableHaircut("disabled");
             setStatus(true);
+        }
+    }
+
+    //Função para deletar o corte
+    async function handleDelete() {
+        try{
+
+            const apiClient = setupAPIClient();
+            await apiClient.delete('/haircut', {
+                params: {
+                    haircut_id: haircut.id
+                }
+            });
+
+            alert("Corte deletado com sucesso!");
+
+            Router.push('/haircuts');
+
+        }catch(err){
+            console.log(err);
+            alert("Erro de novo burro! Acerta logo esse código!");
         }
     }
 
@@ -136,7 +159,8 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
                             onChange={(e) => setPrice(e.target.value)}
                         />
 
-                        <Stack my={4} direction="row" align="center">
+                        <Stack my={4} direction="row" align="center" justify="space-between">
+                            <Flex direction="row" gap={4} justify="center" align="center">
                             <Text fontWeight="bold">
                                 {status ? "Desativar" : "Reativar"}
                             </Text>
@@ -147,6 +171,18 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
                                 isChecked={disableHaircut === "disabled" ? false : true}
                                 onChange={(e : ChangeEvent<HTMLInputElement>) => handleChangeStatus(e)}
                             />
+                            </Flex>
+                            <Button 
+                                bg="transparent"
+                                borderWidth={1}
+                                borderColor="button.danger"
+                                color="button.danger" 
+                                _hover={{ bg: "button.danger", color: "barber.900" }}
+                                onClick={handleDelete}
+                            >
+                                Excluir
+                                <FiTrash2 style={{marginLeft: "10px"}} />
+                            </Button>
                         </Stack>
 
                         <Button

@@ -4,7 +4,6 @@ import Image from "next/image";
 import logoImg from "../../../public/images/logo.png";
 import { Flex, Text, Button, Input, Center } from "@chakra-ui/react";
 import Link from "next/link";
-import styles from "./login.module.scss";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { AuthContext } from "../../context/AuthContext";
 import { motion } from "framer-motion";
@@ -38,7 +37,7 @@ export default function Login() {
             </Head>
         
             <Flex background="barber.400" height="100vh" alignItems="center" justifyContent="center" p={4}>
-                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"black"}>
+                <Flex width={640} direction="column" pl={14} pr={14} py={4} rounded={8} bg={"barber.900"}>
                 <motion.div
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
@@ -83,13 +82,11 @@ export default function Login() {
                         w={"100%"}
                         size={"lg"}
                         fontWeight={400}
-                        bg={"orange"}
-                        transition={"0.3s"}
-                        _hover={{bg: "#1c1d29"}}
-                        className={styles.buttonLogin}
+                        bg="button.cta"
+                        _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
                         onClick={handleLogin}
                     >
-                        Entrar
+                        <Text size="lg" fontWeight="bold">ENTRAR</Text>
                     </Button>
 
                     <Center>
@@ -104,12 +101,11 @@ export default function Login() {
                             mt={6}
                             size={"lg"}
                             fontWeight={400}
-                            bg={"orange"}
-                            transition={"0.3s"}
-                            _hover={{bg: "#1c1d29"}}
-                            className={styles.comebackButon}
+                            bg="button.cta"
+                            _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
                         >
-                            <IoArrowBackCircleOutline /> Voltar
+                            <IoArrowBackCircleOutline size={24} style={{marginRight: "10px"}} />
+                            <Text size="lg" fontWeight="bold">Voltar</Text>
                         </Button>
                     </Link>
                     </Center>
