@@ -13,18 +13,39 @@
 
     ul{
         list-style: none;
+        display: flex;
+        gap: 3rem;
     }
 
     a{
         color: #fff;
         text-decoration: none;
-        font-size: 1rem;
         transition: color 0.3s;
         &:hover{
             color: orange;
         }
     }
 }
+
+// .navigation{
+//     display: flex;
+//     align-items: center;
+//     gap: 1rem;
+
+//     .button{
+//         background-color: orange;
+//         color: #fff;
+//         padding: 5px 10px;
+//         margin-left: 4rem;
+//         border: none;
+//         border-radius: 5px;
+//         cursor: pointer;
+//         transition: background-color 0.3s;
+//         &:hover{
+//             background-color: #ff8c00;
+//         }
+//     }
+// }
 
 .footerSocial{
     display: flex;
@@ -39,6 +60,23 @@
     text-align: center;
     color: #fff;
     font-size: .65rem;
+}
+
+.footerContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+
+    a{
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+        cursor: pointer;
+        &:hover{
+            color: orange;
+        }
+    }
 }
 
 @media(max-width: 768px){

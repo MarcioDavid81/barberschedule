@@ -56,7 +56,7 @@ export default function Profile({ user, premium }: ProfileProps) {
         <title>Minha Conta: {user ? user.name : ""}</title>
       </Head>
       <Sidebar>
-          <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" h="100vh" color="white">
+          <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" minH="100vh" color="white">
             <Flex w="100%" direction="row" alignItems="center" justifyContent="flex-start">
               <Heading fontSize="3xl" mt={4} mb={4} mr={4} color="orange">Minha Conta</Heading>
             </Flex>

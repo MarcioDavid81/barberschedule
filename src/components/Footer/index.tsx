@@ -19,18 +19,7 @@ export default function Footer() {
                     </Link>
                 </div>
                 <div>
-                    <nav className={styles.navigation}>
-                        <ul>
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="#sobre">Sobre</Link></li>
-                            <li><Link href="#contato">Contato</Link></li>
-                        </ul>
-                        <button className={styles.button}>
-                            <Link href="/login">
-                                LOGIN
-                            </Link>
-                        </button>
-                    </nav>
+                    
                 </div>
                 <div className={styles.social}>
                     <h3>Siga nossas redes sociais</h3>
@@ -42,8 +31,11 @@ export default function Footer() {
                 </div>
             </div>
         </footer>
-        <div>
-            <p className={styles.footerCopy}>&copy; {ano} - Todos os direitos reservados</p>
+        <div className={styles.footerCopy}>
+            <div className={styles.footerContent}>
+                <p>&copy; {ano} - Todos os direitos reservados</p>
+                <p>Powered by | <a href='https://futurodev-marcio.netlify.app/' target='_blank'>Marcio David - Web Developer</a></p>
+            </div>
         </div>
         </>
     );

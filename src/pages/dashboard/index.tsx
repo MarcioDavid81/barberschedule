@@ -75,7 +75,7 @@ export default function Dashboard({schedules}: DashboardProps) {
         <title>Dashboard: {user ? user.name : ""}</title>
       </Head>
       <Sidebar>
-        <Flex h="100vh" direction="column" justifyContent="flex-start" alignItems="flex-start" bg="#1c1d29" color="white">
+        <Flex minH="100vh" direction="column" justifyContent="flex-start" alignItems="flex-start" bg="#1c1d29" color="white">
 
             <Flex w="100%" direction="row" alignItems="center" justify="flex-start">
               <Heading fontSize="3xl" mt={4} mb={4} mr={4} color="orange">

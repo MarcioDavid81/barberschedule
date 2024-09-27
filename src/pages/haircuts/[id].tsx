@@ -170,6 +170,7 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
                                 value={disableHaircut}
                                 isChecked={disableHaircut === "disabled" ? false : true}
                                 onChange={(e : ChangeEvent<HTMLInputElement>) => handleChangeStatus(e)}
+                                isDisabled= {subscription?.status !== "premium"}
                             />
                             </Flex>
                             <Button 
@@ -178,6 +179,7 @@ export default function EditHaircut({subscription, haircut}: EditHaircutProps) {
                                 borderColor="button.danger"
                                 color="button.danger" 
                                 _hover={{ bg: "button.danger", color: "barber.900" }}
+                                isDisabled= {subscription?.status !== "premium"}
                                 onClick={handleDelete}
                             >
                                 Excluir

@@ -20,7 +20,7 @@ export default function Planos({ premium }: PlanosProps) {
             <title>Planos</title>
         </Head>
         <Sidebar>
-            <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" h="100vh" color="white">
+          <Flex direction="column" alignItems="flex-start" justifyContent="flex-start" h="100vh" color="white">
 
             <Flex w="100%" direction="row" alignItems="center" justifyContent="flex-start">
               <Link href='/profile' style={{textDecoration: "none"}}>
@@ -29,7 +29,7 @@ export default function Planos({ premium }: PlanosProps) {
                        Voltar
                   </Button>
               </Link>
-              <Heading fontSize="3xl" mt={4} mb={4} mr={4} color="orange">Planos Disponíveis</Heading>
+              <Heading fontSize={isMobile ? "2xl" : "3xl"} mt={4} mb={4} mr={4} color="orange">Planos Disponíveis</Heading>
             </Flex>
 
             <Flex pb={8} maxW="780px" w="100%" direction="column" align="flex-start" justify="flex-start">
@@ -84,7 +84,7 @@ export default function Planos({ premium }: PlanosProps) {
 
             </Flex>
 
-            </Flex>
+          </Flex>
         </Sidebar>
     </>
   )
