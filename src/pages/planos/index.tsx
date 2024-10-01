@@ -33,7 +33,7 @@ export default function Planos({ premium }: PlanosProps) {
       await stripe.redirectToCheckout({ sessionId });
 
     }catch(err){
-      console.log(err)
+      console.log("Você caiu no catch" ,err.message)
     }
 
   }
@@ -52,7 +52,7 @@ export default function Planos({ premium }: PlanosProps) {
       window.location.href = sessionId
 
     }catch(err){
-      console.log(err.message)
+      console.log('Você caiu no catch', err.message)
     }
   }
 
@@ -101,7 +101,7 @@ export default function Planos({ premium }: PlanosProps) {
                     size="lg"
                     mb={4}
                     _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
-                    onClick={handleSubscribe}
+                    onClick={() => alert('Para assinar, entre em contato pelo whatsapp: (55) 99711-6476')}
                     isDisabled={premium ? true : false}
                   >
                     {premium ? "VOCÊ JÁ É PREMIUM" : "QUERO SER PREMIUM"}
@@ -116,7 +116,7 @@ export default function Planos({ premium }: PlanosProps) {
                       color="button.danger"
                       fontWeight="bold"
                       _hover={{ bg: "button.danger", color: "barber.900"}}
-                      onClick={handleCreatePortal}
+                      onClick={() => alert('Para alterações, entre em contato pelo whatsapp: (55) 99711-6476')}
                     >
                     ALTERAR ASSINATURA
                     </Button>
