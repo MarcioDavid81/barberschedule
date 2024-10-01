@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useState, useEffect, useContext } from "react";
 import { destroyCookie, setCookie, parseCookies } from "nookies";
 import { api } from "../services/apiClient";
-import { useRouter } from "next/navigation";
 import Router from "next/router";
 
 interface AuthContextData {
@@ -117,9 +116,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`
 
             alert("Login efetuado com sucesso");
-
+            
             Router.push("/dashboard");
-            // router.push("/dashboard");
 
         }catch(err) {
 

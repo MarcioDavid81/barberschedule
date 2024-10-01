@@ -5,6 +5,7 @@ import React from 'react'
 import { FiChevronLeft } from 'react-icons/fi';
 import { canSSRAuth } from '@/utils/canSSRAuth';
 import { setupAPIClient } from '../../services/api';
+import { getStripeJs } from '../../services/stripe-js';
 
 interface PlanosProps {
   premium: boolean;
@@ -13,6 +14,47 @@ interface PlanosProps {
 export default function Planos({ premium }: PlanosProps) {
 
   const [isMobile] = useMediaQuery("(max-width: 768px)");
+
+  const handleSubscribe = async () => {
+    
+    if(premium){
+      return
+    }
+
+    try{
+
+      const apiClient = setupAPIClient()
+
+      const response = await apiClient.post('/subscribe')
+
+      const { sessionId } = response.data;
+
+      const stripe = await getStripeJs();
+      await stripe.redirectToCheckout({ sessionId });
+
+    }catch(err){
+      console.log(err)
+    }
+
+  }
+
+  async function handleCreatePortal() {
+    try{
+      if(!premium){
+        return
+      }
+
+      const apiClient = setupAPIClient()
+      const response = await apiClient.post('/create-portal')
+
+      const { sessionId } = response.data;
+
+      window.location.href = sessionId
+
+    }catch(err){
+      console.log(err.message)
+    }
+  }
 
   return (
     <>
@@ -59,25 +101,26 @@ export default function Planos({ premium }: PlanosProps) {
                     size="lg"
                     mb={4}
                     _hover={{ bg: "transparent", color: "button.cta", borderWidth: 1, borderColor: "button.cta" }}
-                    onClick={() => console.log("Quero ser premium!")}
+                    onClick={handleSubscribe}
                     isDisabled={premium ? true : false}
-                >
-                  {premium ? "VOCÊ JÁ É PREMIUM" : "QUERO SER PREMIUM"}
-                </Button>
-                {premium && (
-                  <Button 
-                    w="100%"
-                    bg="transparent"
-                    borderWidth={1}
-                    borderColor="button.danger"
-                    color="button.danger"
-                    fontWeight="bold"
-                    _hover={{ bg: "button.danger", color: "barber.900"}}
-                    onClick={() => console.log("Cancelar assinatura!")}
                   >
-                    CANCELAR ASSINATURA
+                    {premium ? "VOCÊ JÁ É PREMIUM" : "QUERO SER PREMIUM"}
                   </Button>
-                )}
+                  
+                  {premium && (
+                    <Button 
+                      w="100%"
+                      bg="transparent"
+                      borderWidth={1}
+                      borderColor="button.danger"
+                      color="button.danger"
+                      fontWeight="bold"
+                      _hover={{ bg: "button.danger", color: "barber.900"}}
+                      onClick={handleCreatePortal}
+                    >
+                    ALTERAR ASSINATURA
+                    </Button>
+                  )}
                 </Flex>
 
               </Flex>
