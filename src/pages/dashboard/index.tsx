@@ -8,6 +8,7 @@ import { canSSRAuth } from '@/utils/canSSRAuth';
 import { PiHairDryer } from 'react-icons/pi';
 import { IoMdPerson } from 'react-icons/io';
 import { ModalInfo } from '@/components/Modal';
+import Calendario from '@/components/Calendario/Calendario';
 
 export interface ScheduleItem {
   id: string;
@@ -114,6 +115,8 @@ export default function Dashboard({schedules}: DashboardProps) {
                 </Flex>
               </Link>
             ))}
+
+            <Calendario />
 
         </Flex>
       </Sidebar>
