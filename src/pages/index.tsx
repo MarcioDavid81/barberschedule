@@ -10,7 +10,6 @@ import agendaImg from "../../public/images/agenda.jpg";
 import atrasoImg from "../../public/images/atrasos.jpg";
 
 
-
 export default function Home() {
   return(
     <>

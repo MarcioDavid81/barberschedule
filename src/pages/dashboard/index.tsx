@@ -8,11 +8,12 @@ import { canSSRAuth } from '@/utils/canSSRAuth';
 import { PiHairDryer } from 'react-icons/pi';
 import { IoMdPerson } from 'react-icons/io';
 import { ModalInfo } from '@/components/Modal';
-import Calendario from '@/components/Calendario/Calendario';
 
 export interface ScheduleItem {
   id: string;
   costumer: string;
+  start: string;
+  end: string;
   haircut: {
     id: string;
     name: string;
@@ -108,7 +109,8 @@ export default function Dashboard({schedules}: DashboardProps) {
                       <IoMdPerson size={30} color="orange" />
                       <Text ml={4} fontWeight="bold" noOfLines={1}>{item?.costumer}</Text>
                     </Flex>
-
+                    <Text fontWeight="bold">Dia: {item?.start}</Text>
+                    <Text fontWeight="bold">Das: 16:00{item?.start} às 17:00{item?.end}</Text>
                     <Text fontWeight="bold">{item?.haircut?.name}</Text>
                     <Text fontWeight="bold">R$ {item?.haircut?.price}</Text>
 
@@ -116,7 +118,6 @@ export default function Dashboard({schedules}: DashboardProps) {
               </Link>
             ))}
 
-            <Calendario />
 
         </Flex>
       </Sidebar>
